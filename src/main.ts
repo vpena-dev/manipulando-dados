@@ -11,9 +11,9 @@
 // 6 - Normalize os dados da API se achar necessário.
 
 import { CountList } from './modules/countBy';
-import Statistics from './modules/Estatisticas';
+import Statistics from './modules/Statistics';
 import fetchData from './modules/fetchData';
-import normalizeTransaction from './modules/normalizarTransacao';
+import normalizeTransaction from './modules/normalizeTransaction';
 
 async function handleData() {
   const data = await fetchData<TransacaoAPI[]>(
