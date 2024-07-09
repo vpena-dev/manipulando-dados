@@ -11,21 +11,21 @@
 // 6 - Normalize os dados da API se achar necessário.
 
 import { CountList } from './modules/countBy';
-import Estatisticas from './modules/Estatisticas';
+import Statistics from './modules/Estatisticas';
 import fetchData from './modules/fetchData';
-import normalizarTransacao from './modules/normalizarTransacao';
+import normalizeTransaction from './modules/normalizarTransacao';
 
 async function handleData() {
   const data = await fetchData<TransacaoAPI[]>(
     'https://api.origamid.dev/json/transacoes.json?'
   );
   if (!data) return;
-  const transacoes = data.map(normalizarTransacao);
-  preencherTabela(transacoes);
-  preencherEstatisticas(transacoes);
+  const transacoes = data.map(normalizeTransaction);
+  fillTable(transacoes);
+  fillStatistics(transacoes);
 }
 
-function preencherTabela(transacoes: Transacao[]): void {
+function fillTable(transacoes: Transacao[]): void {
   transacoes.forEach((transacao) => {
     const tbody = document.querySelector<HTMLElement>('#dados tbody');
     if (tbody) {
@@ -42,7 +42,7 @@ function preencherTabela(transacoes: Transacao[]): void {
   });
 }
 
-function preencherLista(lista: CountList, containerId: string): void {
+function fillList(lista: CountList, containerId: string): void {
   const containerElement = document.getElementById(containerId);
   if (containerElement) {
     Object.keys(lista).forEach((key) => {
@@ -53,11 +53,11 @@ function preencherLista(lista: CountList, containerId: string): void {
   }
 }
 
-function preencherEstatisticas(transacoes: Transacao[]): void {
-  const data = new Estatisticas(transacoes);
+function fillStatistics(transacoes: Transacao[]): void {
+  const data = new Statistics(transacoes);
 
-  preencherLista(data.pagamento, 'pagamento');
-  preencherLista(data.status, 'status');
+  fillList(data.pagamento, 'pagamento');
+  fillList(data.status, 'status');
 
   const totalElement = document.querySelector<HTMLElement>('#total span');
   if (totalElement) {

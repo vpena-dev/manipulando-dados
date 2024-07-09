@@ -6,7 +6,7 @@ function filtrarValor(transacao: Transacao): transacao is TransacaoValor {
   return transacao.valor !== null;
 }
 
-export default class Estatisticas {
+export default class Statistics {
   private transacoes;
   total;
   pagamento;

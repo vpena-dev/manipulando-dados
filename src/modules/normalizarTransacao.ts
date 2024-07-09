@@ -32,7 +32,7 @@ declare global {
   }
 }
 
-export default function normalizarTransacao(
+export default function normalizeTransaction(
   transacao: TransacaoAPI
 ): Transacao {
   return {
